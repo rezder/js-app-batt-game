@@ -1,3 +1,8 @@
+/*
+. = class
+# = id
+ = element
+ */
 .App {
   text-align: center;
 }
@@ -14,11 +19,97 @@
   color: white;
 }
 
-.App-intro {
-  font-size: large;
-}
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+html{
+    background-color:#eedfcc;
+}
+body {
+    width:1090px;
+    padding: 10px;
+    margin-left:auto;
+    margin-right:auto;
+    background-color: #fdf5e6;
+}
+input[type=text],input[type=password]{
+    background-color:#fffaf0;
+}
+.invalid-text{
+    color:red
+}
+.login table{
+    margin-left:auto;
+    margin-right:auto;
+}
+.login button{
+    margin-right: 5px;
+}
+.public_fixedDataTable_main{
+    margin-left:auto;
+    margin-right:auto;
+}
+.tab-players {
+    width:50%;
+}
+.tab-invites{
+    width:50%;
+    float:right;
+}
+#info-div, #message-div{
+    width:345px;
+}
+#info-message-div{
+    width:355px;
+    padding-left:10px;
+    float:right;
+}
+textarea {
+    background-color:#fffaf0;
+}
+#info-message-div textarea{
+    width:349px;
+    font-size:small;
+}
+textarea:read-only{
+    background-color:#faebd7;
+}
+.batt-game{
+    width:725px;
+}
+
+svg{
+    border:5px solid #000000;
+}
+.disconnected svg{
+    border-color:#ff0000;
+}
+svg text {
+    cursor: default;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+svg text::selection {
+    background: none;
+}
+h1 h2 h3{
+    text-align: center;
+}
+#batt-guide{
+    text-align:left;
+}
+.svg-button-background{
+    fill:#fdf5e6;
+}
+button {
+    margin-left:5px;
+    margin-right:5px;
+}
+.batt-game .sub-panel textarea{
+    vertical-align:bottom;
 }
