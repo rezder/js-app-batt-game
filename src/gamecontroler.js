@@ -236,7 +236,7 @@ export class BattGameControler extends Component {
                 }
                 let o = msgPlayersFilter(pMap, this.state.msgPlayers)
                 if (o.isUpdate) {
-                    state.players = o.updPlayers
+                    state.msgPlayers = o.updPlayers
                 }
                 //TODO check old js removed invites do not think it is necessary
                 this.setState(state);

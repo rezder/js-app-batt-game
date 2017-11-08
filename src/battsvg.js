@@ -194,11 +194,11 @@ export class BattSvg extends Component {
                 upd.flagCardPointer = null;
                 upd.scoutReturnPointer = null;
                 if (!prevState.conePos.every((v, i) => v ===
-                    nextProps.conePos[i])) {
+                        nextProps.conePos[i])) {
                     upd.conePos = nextProps.conePos;
                 } else {
                     let cardDiffs = diffCardPos(props.cardPos,
-                                                nextProps.cardPos);
+                        nextProps.cardPos);
                     if (cardDiffs.length > 0) {
                         upd.markedPointers = [];
                         upd.posCards = [];
@@ -208,12 +208,12 @@ export class BattSvg extends Component {
                         for (let diff of cardDiffs) {
                             if ((prevState.handCardPointer) &&
                                 diff.pointer.ix === prevState.handCardPointer
-                                                             .ix) {
+                                .ix) {
                                 upd.handCardPointer = null;
                             }
                             upd.markedPointers.push(diff.pointer);
                             let addList = upd.posCards[diff.pointer
-                                                           .pos];
+                                .pos];
                             upd.posCards[diff.pointer.pos] =
                                 addList.concat(
                                     [diff.pointer.ix]);
@@ -248,26 +248,26 @@ export class BattSvg extends Component {
         let cone = design.cardWidth / 2;
         let height = 2 * (3 * design.space + 2 * dSpace + 6 *
             design.groupStroke +
-                          1.5 * cone +
-                          3 * design.cardHeight + 4 * design.groupVStep);
+            1.5 * cone +
+            3 * design.cardHeight + 4 * design.groupVStep);
         let width = 12 * dSpace + 22 * design.groupStroke + 11 *
-        design.cardWidth;
+            design.cardWidth;
         design.height = height;
         design.width = width;
 
         let handButtonY = design.height / 2 - 2 * design.space - 2 *
-        design
-                                .groupStroke -
-                          design.cardHeight;
+            design
+            .groupStroke -
+            design.cardHeight;
         let buttonPanelY = handButtonY + design.height / 2
         let handButtonX = (design.width - 8 * design.groupHStep - 2 *
             design.groupStroke -
-                           design.cardWidth) / 2;
+            design.cardWidth) / 2;
         let handWidth = design.cardWidth + (design.groupStroke * 2) +
-                    (
-                        8 * design.groupHStep);
+            (
+                8 * design.groupHStep);
         let buttonPanelX = handButtonX + handWidth + design.space *
-        2
+            2
         design.buttonPanelX = buttonPanelX
         design.buttonPanelY = buttonPanelY
 
@@ -308,14 +308,12 @@ export class BattSvg extends Component {
                     this.state.handCardPointer.ix === dCard.TCScout
                 ) {
                     let deckMovePos = mv.findOldPosOnSecond(moves,
-                                                            dCard.TCScout)
+                        dCard.TCScout)
                     if (deckMovePos.length > 0) {
                         isScoutMove = true;
                     }
                 } else {
-                    if (this.state.handCardPointer) {
-                        isScoutMove = mv.isScout23(moves);
-                    }
+                    isScoutMove = mv.isScout23(moves);
                     isScoutReturnMove = mv.isScoutReturn(moves);
                 }
             }
@@ -442,10 +440,10 @@ function clickCardPointer(state, clickedPointer, moves) {
                 if ((handCardPointer) &&
                     handCardPointer.ix === dCard.TCScout) {
                     moveix = mv.findMoveOldPosOnSecond(handCardPointer.ix,
-                                                       clickedPointer.pos, moves);
+                        clickedPointer.pos, moves);
                 } else {
                     moveix = mv.findMovePosOnFirst(clickedPointer.ix, dPos.card
-                                                                          .Players[mv.mover(moves)].Hand, moves);
+                        .Players[mv.mover(moves)].Hand, moves);
                 }
             }
             break;
@@ -480,7 +478,7 @@ function clickFlagDish(state, moves, clickedPointer) {
                     };
                 } else {
                     moveix = mv.findMovePosOnSecond(handCardix, flagCardix,
-                                                    clickedPos, moves)
+                        clickedPos, moves)
                 }
             } else {
                 updState = {
@@ -505,7 +503,7 @@ function clickScoutReturn(state, moves, clickedPointer) {
     let mover = mv.mover(moves)
     if (noScoutR === 1) {
         moveix = mv.findMovePosOnFirst(handCardPointer.ix, clickedPointer.pos,
-                                       moves);
+            moves);
     } else {
         let scoutReturnPointer = state.scoutReturnPointer;
         if (scoutReturnPointer) {
@@ -535,7 +533,7 @@ function clickScoutReturn(state, moves, clickedPointer) {
             }
             posCards[dPos.card.Players[mover].Hand] = updHand;
             let srp = dPos.Pointer.Card(dPos.card.ScoutReturn,
-                                        handCardPointer.ix)
+                handCardPointer.ix)
             updState = {
                 scoutReturnPointer: srp,
                 handCardPointer: null,
@@ -620,12 +618,12 @@ function pp(event, svg) {
     point.x = event.clientX;
     point.y = event.clientY;
     point = point.matrixTransform(svg.getScreenCTM()
-                                     .inverse());
+        .inverse());
     return point;
 }
 
 function createButtonPanel(handler, winner, view, lastMoveType, moves,
-                           design) {
+    design) {
     let viewPlayer = NONE_Player
     let isViewPlayer = false
     if (view === VIEW_Player0 || view === VIEW_Player1) {
@@ -687,7 +685,7 @@ class PlayerCards {
 }
 
 function createPlayer(state, moves, mover, view, noPlayerHandTacs,
-                      noPlayerHandTroops, isReverse, player, svgHandler, design,lastMover) {
+    noPlayerHandTroops, isReverse, player, svgHandler, design, lastMover) {
     let handPointer = state.handCardPointer;
     let flagPointer = state.flagCardPointer;
     let handler = svgHandler;
@@ -705,7 +703,7 @@ function createPlayer(state, moves, mover, view, noPlayerHandTacs,
         if (isMover ||
             (!state.handCardPointer) ||
             !(handPointer.ix === dCard.TCTraitor ||
-              handPointer.ix === dCard.TCDeserter)) {
+                handPointer.ix === dCard.TCDeserter)) {
             handPointer = null;
             flagPointer = null;
             handler = null;
@@ -714,12 +712,12 @@ function createPlayer(state, moves, mover, view, noPlayerHandTacs,
     }
     let markedPointers = null;
     if (state.markedPointers) {
-        if (view===VIEW_Player0||view===VIEW_Player1){
-            if (lastMover===player && isReverse){
-                markedPointers=state.markedPointers;
+        if (view === VIEW_Player0 || view === VIEW_Player1) {
+            if (lastMover === player && isReverse) {
+                markedPointers = state.markedPointers;
             }
-        }else{
-            markedPointers=state.markedPointers;
+        } else {
+            markedPointers = state.markedPointers;
         }
     }
     return (
@@ -754,11 +752,11 @@ function createName(player, moves, lastMover, names) {
 function conesCreate(conePos, mover, moves, view, svgHandler, design) {
     let size = design.cardWidth / 2;
     let diff = 3 * design.space + 4 * design.groupStroke + 2 * design.cardHeight +
-               4 * design.groupVStep + size;
+        4 * design.groupVStep + size;
     let poss = conePos;
     let moveables = [false, false, false, false, false, false, false, false,
-                     false,
-                     false
+        false,
+        false
     ];
     let handler = null;
     if ((svgHandler) &&
@@ -769,7 +767,7 @@ function conesCreate(conePos, mover, moves, view, svgHandler, design) {
         handler = svgHandler;
         for (let moveix = 0; moveix < moves.length; moveix++) {
             let move = moves[moveix];
-            if (move.Moves){
+            if (move.Moves) {
                 for (let bpix = 0; bpix < move.Moves.length; bpix++) {
                     let coneMove = move.Moves[bpix];
                     moveables[coneMove.Index] = true;
@@ -779,7 +777,7 @@ function conesCreate(conePos, mover, moves, view, svgHandler, design) {
     }
     let cones = [];
     let start = 4 * design.space + 2 * design.groupStroke + design.cardWidth +
-                design.groupStroke + design.cardWidth / 2;
+        design.groupStroke + design.cardWidth / 2;
     let step = 2 * design.groupStroke + design.cardWidth + 2 * design.space;
 
     for (let i = 0; i < 9; i++) {
@@ -812,9 +810,9 @@ function createSpinner(isSending, xSpinner, ySpinner) {
 
 function createShade(winner, lastMoveType, height, width) {
     let on = winner !== NONE_Player ||
-             lastMoveType === dMoveType.GiveUp ||
-             lastMoveType === dMoveType.Pause ||
-             lastMoveType === dMoveType.None;
+        lastMoveType === dMoveType.GiveUp ||
+        lastMoveType === dMoveType.Pause ||
+        lastMoveType === dMoveType.None;
     return (
         <Shade
             height={height}
@@ -878,7 +876,7 @@ function createScoutReturn(pointer, design, moveHandler) {
         let x = 0;
         let y = design.height / 2 + design.cardHeight / 4;
         let space = design.cardWidth / 2 + 2 * design.space + design.cardStroke /
-        2;
+            2;
         if (dCard.isTac(pointer.ix)) {
             x = design.width - space - design.cardWidth - design.cardStroke;
         } else {
