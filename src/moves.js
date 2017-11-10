@@ -204,6 +204,21 @@ export function findMovePosOnFirst(cardix, cardPos, moves) {
     }
     return moveix;
 }
+export function findMoveIndexOnSecond(firstCardix, secondCardix, moves) {
+    let moveix = -1;
+    for (let i = 0; i < moves.length; i++) {
+        let move = moves[i];
+        if (move.Moves && move.Moves.length===2) {
+            let pbFirstix = move.Moves[0].Index;
+            let pbSecondix =move.Moves[1].Index;
+            if (pbFirstix === firstCardix && pbSecondix === secondCardix) {
+                moveix = i;
+                break;
+            }
+        }
+    }
+    return moveix;
+}
 export function findMoveOldPosOnSecond(firstCardix, cardPos, moves) {
     let moveix = -1;
     for (let i = 0; i < moves.length; i++) {

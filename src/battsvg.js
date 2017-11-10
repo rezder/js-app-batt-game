@@ -465,7 +465,7 @@ function clickFlagDish(state, moves, clickedPointer) {
     let clickedPos = clickedPointer.pos;
     switch (handCardix) {
         case dCard.TCDeserter:
-            moveix = mv.findMoveOldPosOnSecond(handCardix, clickedPos, moves);
+            moveix = mv.findMoveIndexOnSecond(handCardix, clickedPointer.ix, moves);
             break;
         case dCard.TCTraitor:
         case dCard.TCRedeploy:
