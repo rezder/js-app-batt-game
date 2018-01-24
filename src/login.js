@@ -80,6 +80,8 @@ export class LogIn extends Component {
                     default:
                         console.log(["This was unexpected status: ",logInStatus])
                 }
+            }else if (http.readyState === 4 && http.status !== 200){
+                login.props.handlerIn(false)
             }
         }
         http.send(params);

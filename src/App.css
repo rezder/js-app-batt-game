@@ -29,11 +29,57 @@ html{
     background-color:#eedfcc;
 }
 body {
-    width:1090px;
-    padding: 10px;
+    padding-left: 5px;
+    padding-right:5px;
     margin-left:auto;
     margin-right:auto;
     background-color: #fdf5e6;
+}
+@media only screen and (min-width: 1125px){
+    body {
+        max-width:1090px;
+    }
+    .batt-game{
+        width:725px;
+        float:right;
+        padding-left:10px;
+    }
+    #info-message-div{
+        width:355px;
+        height:764.72px;/*same as svg */
+    }
+    #info-message-div textarea{
+        width:345px;
+    }
+    .tab-players {
+        width:50%;
+        float:right;
+    }
+    .tab-invites{
+        width:50%;
+        height:488.81px;/*same as tab-players (button) */
+    }
+}
+@media only screen and (max-width: 1124px){
+    body {
+        max-width:800px;
+        min-width:705px;
+    }
+    #info-message-div{
+        overflow:hidden;/*avoid margin colapse*/
+        margin-bottom:10px;
+    }
+    #info-message-div textarea{
+        max-width:345px;
+    }
+    #info-div {
+        width:50%;
+        float:right;
+    }
+    #message-div{
+        width:50%;
+        float:left;
+    }
 }
 input[type=text],input[type=password]{
     background-color:#fffaf0;
@@ -52,34 +98,17 @@ input[type=text],input[type=password]{
     margin-left:auto;
     margin-right:auto;
 }
-.tab-players {
-    width:50%;
-}
-.tab-invites{
-    width:50%;
-    float:right;
-}
-#info-div, #message-div{
-    width:345px;
-}
-#info-message-div{
-    width:355px;
-    padding-left:10px;
-    float:right;
-}
 textarea {
     background-color:#fffaf0;
 }
+
 #info-message-div textarea{
-    width:349px;
     font-size:small;
 }
 textarea:read-only{
     background-color:#faebd7;
 }
-.batt-game{
-    width:725px;
-}
+
 
 svg{
     border:5px solid #000000;
@@ -97,7 +126,7 @@ svg text {
 svg text::selection {
     background: none;
 }
-h1 h2 h3{
+h1{
     text-align: center;
 }
 #batt-guide{
@@ -112,4 +141,9 @@ button {
 }
 .batt-game .sub-panel textarea{
     vertical-align:bottom;
+}
+.h2-button {
+    margin-bottom:0.83em;
+    margin-top:0.83em;
+    font-size:1.3em;
 }

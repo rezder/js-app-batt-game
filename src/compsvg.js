@@ -160,8 +160,8 @@ export class Button extends Component {
     }
     static defaultProps = {
         disabled: false,
-        height: 20,
-        fontSize: 10
+        height: 24,
+        fontSize: 12
     };
     static propTypes = {
         text: PropTypes.string.isRequired,

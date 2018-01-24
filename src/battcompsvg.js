@@ -84,7 +84,7 @@ class Flag extends Component {
         let troops = 4;
         let tacs = 2;
         let step = 2 * design.groupStroke + design.space + design.cardHeight +
-              (troops - 1) * design.groupVStep;
+               (troops - 1) * design.groupVStep;
         return (
             <g>
                 <CardGroup cardixs={sort.troops}
@@ -478,10 +478,10 @@ export class ButtonPanel extends Component {
                     }
                 }
             }
-            let space=8
-            let letterWidth=8
+            let space=12
+            let letterWidth=9
             let colWidth=letterWidth*6+space
-            let rowHight=20+space
+            let rowHight=24+space
             return (
                 <g>
                     <g transform={translate(0,0)}>

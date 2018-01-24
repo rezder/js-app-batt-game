@@ -72,13 +72,15 @@ export class BattGameControler extends Component {
                         .id(playerId)
                         .build();
         this.state.ws.send(JSON.stringify(action));
-        console.log(["sending watch action: ",action])
+        console.log(["sending watch action: ", action])
         let {
             isUpdate,
             updPlayers
         } = msgPlayersAdd(this.state.msgPlayers, playerName, playerId);
-        if (isUpdate){
-            this.setState({msgPlayers:updPlayers});
+        if (isUpdate) {
+            this.setState({
+                msgPlayers: updPlayers
+            });
         }
     }
     watchStopHandler(playerId, gameTs) {
@@ -109,13 +111,16 @@ export class BattGameControler extends Component {
                                 .build();
                 this.state.ws.send(JSON.stringify(action));
                 let updInvites = invitesAdd(this.state.invites, invite);
-                let state={invites: updInvites}
+                let state = {
+                    invites: updInvites
+                }
                 let {
                     isUpdate,
                     updPlayers
-                } = msgPlayersAdd(this.state.msgPlayers, playerName, playerId);
-                if (isUpdate){
-                    state.msgPlayers=updPlayers;
+                } = msgPlayersAdd(this.state.msgPlayers, playerName,
+                                  playerId);
+                if (isUpdate) {
+                    state.msgPlayers = updPlayers;
                 }
                 this.setState(state);
 
@@ -147,7 +152,7 @@ export class BattGameControler extends Component {
         let txt = PlayerName + direc + msgTxt + "\n"
 
         let state = {
-            msgOut:  txt + "\n" + this.state.msgOut
+            msgOut: txt + "\n" + this.state.msgOut
         };
         let {
             isUpdate,
@@ -166,7 +171,7 @@ export class BattGameControler extends Component {
     wsOnOpen(e) {
         this.setState({
             ws: this.ws,
-            msgInfo: "Connected to game server.\n\n" +this.state.msgInfo
+            msgInfo: "Connected to game server.\n\n" + this.state.msgInfo
         });
         let action = act.actionBuilder(act.List)
                         .build();
@@ -260,7 +265,7 @@ export class BattGameControler extends Component {
                 if (invite.IsRejected) {
                     let txt = invite.ReceiverName +
                               " declined your invitation"
-                              state.msgOut =txt + "\n" +  this.state.msgOut
+                              state.msgOut = txt + "\n" + this.state.msgOut
                 } else {
                     let {
                         isUpdate,
@@ -274,9 +279,12 @@ export class BattGameControler extends Component {
                 this.setState(state);
                 break;
             case JT_Playing:
-                const {updState,playerNames}=receiveGameingData(this.pMap,json.Data,this.state.msgInfo)
+                const {
+                    updState,
+                    playerNames
+                } = receiveGameingData(this.pMap, json.Data, this.state.msgInfo)
                 //TODO check for game done and if done update list
-                this.playerNames=playerNames
+                this.playerNames = playerNames
                 this.setState(updState);
                 break;
             case JT_Watching:
@@ -296,15 +304,19 @@ export class BattGameControler extends Component {
                     }
                 }
                 if (!isBlocked) {
-                    const {updState,playerNames}=receiveGameingData(this.pMap,wData,this.state.msgInfo)
+                    const {
+                        updState,
+                        playerNames
+                    } = receiveGameingData(this.pMap, wData, this.state.msgInfo)
                     //TODO check for game done and if done update list winner and last move type
-                    this.playerNames=playerNames
+                    this.playerNames = playerNames
                     this.setState(updState);
                 }
                 break;
             case JT_CloseCon:
                 this.setState({
-                    msgInfo:  json.Data.Reason+ "\n\n" + this.state.msgInfo
+                    msgInfo: json.Data.Reason + "\n\n" + this.state
+                                 .msgInfo
                 });
                 break;
             case JT_ClearInvites:
@@ -350,13 +362,17 @@ export class BattGameControler extends Component {
             }
             viewPos = gameData.ViewPos;
         }
-        let className=null;
-        if (!this.state.ws){
-            className="disconnected";
+        let className = null;
+        if (!this.state.ws) {
+            className = "disconnected";
         }
         return (
             <div className={className}>
-                <h2>Game</h2>
+                <BattGame gameData={gameData}
+                          ws={this.state.ws}
+                          names={playerNames}
+                          watchStopHandler={this.watchStopHandler}
+                />
                 <div id="info-message-div">
                     <div id="info-div">
                         <h2>Info</h2>
@@ -387,16 +403,8 @@ export class BattGameControler extends Component {
                         />
                     </div>
                 </div>
-                <BattGame gameData={gameData}
-                          ws={this.state.ws}
-                          names={playerNames}
-                          watchStopHandler={this.watchStopHandler}
-                />
-                <TabInvites
-                    invites={this.state.invites}
-                    ws={this.state.ws}
-                    removeInviteHandler={this.removeInviteHandler}
-                />
+
+
                 <TabPlayers
                     players={this.state.players}
                     ws={this.state.ws}
@@ -407,6 +415,11 @@ export class BattGameControler extends Component {
                     watchHandler={this.watchHandler}
                     sendInviteHandler={this.sendInviteHandler}
                     addMsgPlayersHandler= {this.addMsgPlayersHandler}
+                />
+                <TabInvites
+                    invites={this.state.invites}
+                    ws={this.state.ws}
+                    removeInviteHandler={this.removeInviteHandler}
                 />
                 <BattGuide/>
             </div>
@@ -654,9 +667,9 @@ function failedClaimedTxt(flagEx, moverName) {
             text = text + "\nFlag " + flagNo + ": Example: ";
             for (let i = 0; i < cardixs.length; i++) {
                 let cardix = cardixs[i];
-                if (i===0){
+                if (i === 0) {
                     text = text + " " + dCard.text(cardix);
-                }else{
+                } else {
                     text = text + "," + dCard.text(cardix);
                 }
             }
@@ -666,7 +679,7 @@ function failedClaimedTxt(flagEx, moverName) {
 }
 
 function gamePlayerNames(pMap, playingIDs) {
-   let playerNames = [];
+    let playerNames = [];
     for (let i = 0; i < 2; i++) {
         let player = pMap[playingIDs[i].toString()]
         if (player) {
@@ -679,19 +692,20 @@ function gamePlayerNames(pMap, playingIDs) {
 
 }
 
-function receiveGameingData(pMap, data,msgInfo) {
+function receiveGameingData(pMap, data, msgInfo) {
     let playerNames = gamePlayerNames(pMap, data.PlayingIDs)
     let updState = {
         gameData: data
     };
     if (data.FailedClaimedExs) {
-        let txt = failedClaimedTxt(data.FailedClaimedExs,playerNames[data.ViewPos.LastMover])
+        let txt = failedClaimedTxt(data.FailedClaimedExs, playerNames[data.ViewPos
+                                                                          .LastMover])
         if (txt) {
-            updState.msgInfo = txt + "\n\n"+ msgInfo
+            updState.msgInfo = txt + "\n\n" + msgInfo
         }
     }
     return {
         updState: updState,
-        playerNames:playerNames
+        playerNames: playerNames
     };
 }

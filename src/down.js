@@ -11,7 +11,7 @@ export class Down extends Component {
     static propTypes={
         handlerOut:PropTypes.func.isRequired
     }
-    chechkServer(){
+    checkServer(){
         let http = new XMLHttpRequest();
         let url = "ping";
         http.open("POST", url, true)

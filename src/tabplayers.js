@@ -13,9 +13,9 @@ import {
 import 'fixed-data-table/dist/fixed-data-table.css';
 
 export class TabPlayers extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.updHandler=this.updHandler.bind(this);
+        this.updHandler = this.updHandler.bind(this);
     }
     static propTypes = {
         players: PropTypes.array.isRequired,
@@ -28,8 +28,9 @@ export class TabPlayers extends Component {
         watchHandler: PropTypes.func.isRequired,
         addMsgPlayersHandler: PropTypes.func.isRequired,
     }
-    updHandler(){
-        let action=act.actionBuilder(act.List).build();
+    updHandler() {
+        let action = act.actionBuilder(act.List)
+                        .build();
         this.props.ws.send(JSON.stringify(action));
     }
     render() {
@@ -52,13 +53,18 @@ export class TabPlayers extends Component {
                 isGame = true;
             }
         }
-        let isUpdDisabled=false;
-        if (!ws){
-            isUpdDisabled=true;
+        let isUpdDisabled = false;
+        if (!ws) {
+            isUpdDisabled = true;
         }
         return (
             <div className="tab-players">
-                <h2>Players</h2>
+                <button type="button"
+                        onClick={this.updHandler}
+                        disabled={isUpdDisabled}
+                        className="h2-button"
+                        title="Push to update"
+                >Players</button>
                 <Table
                     rowHeight={30}
                     headerHeight={40}
@@ -100,10 +106,7 @@ export class TabPlayers extends Component {
                     />
 
                 </Table>
-                <button type="button"
-                        onClick={this.updHandler}
-                        isDisabled={isUpdDisabled}
-                >Update</button>
+
             </div>
         )
 
@@ -138,16 +141,16 @@ class ButtonsCell extends React.Component {
                 }
             }
             if (!isGame) {
-                if (player.Opp===0){
-                isInvite = true
-                for (let i = 0; i < invites.length; i++) {
-                    if (invites[i].InvitorID === player.ID ||
-                        invites[i].ReceiverID === player.ID) {
-                        isInvite = false;
-                        break;
+                if (player.Opp === 0) {
+                    isInvite = true
+                    for (let i = 0; i < invites.length; i++) {
+                        if (invites[i].InvitorID === player.ID ||
+                            invites[i].ReceiverID === player.ID) {
+                            isInvite = false;
+                            break;
+                        }
                     }
-                }
-                }else{
+                } else {
                     isWatch = true
                 }
             }
@@ -216,12 +219,12 @@ class ButtonsPanel extends React.Component {
     }
 }
 class PanelButton extends React.Component {
-    static propTypes={
-        isDisabled:PropTypes.bool.isRequired,
-        text:PropTypes.string.isRequired,
+    static propTypes = {
+        isDisabled: PropTypes.bool.isRequired,
+        text: PropTypes.string.isRequired,
         playerId: PropTypes.number.isRequired,
         playerName: PropTypes.string.isRequired,
-        handler:PropTypes.func.isrequired
+        handler: PropTypes.func.isrequired
     }
     render() {
         if (this.props.isDisabled) {
